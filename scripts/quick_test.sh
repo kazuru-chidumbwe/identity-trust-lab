@@ -32,8 +32,12 @@ print("PASS wso2 normalize →", "artifacts/normalize-smoke/wso2-normalized.json
 
 m = json.loads(Path("results/case1-partial/matrix-C1-token-shape-2026-07-23.json").read_text())
 assert m["rows"][0]["verdict"] == "same"
-assert m["rows"][1]["verdict"] == "config_drift"
+assert m["rows"][1]["feature"] == "access_token_is_jwt" and m["rows"][1]["verdict"] == "config_drift"
+assert m["rows"][2]["feature"] == "token_lifetime_expires_in" and m["rows"][2]["verdict"] == "config_drift"
+assert m["rows"][2]["observed"]["keycloak"]["expires_in"] == 300
+assert m["rows"][2]["observed"]["wso2is"]["expires_in"] == 3600
 assert m["config_equivalence"]["passed"] is False
+assert len(m["rows"]) == 3
 print("PASS case1 partial matrix present (", len(m["rows"]), "rows)")
 PY
 

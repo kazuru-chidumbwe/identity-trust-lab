@@ -32,6 +32,7 @@ Under matched grant + scopes on itl-lab (`P-PASSWORD-OPENID-v0`):
 | --- | --- |
 | Password+openid issues tokens (200 / Bearer / refresh / `sub`) | `same` |
 | Access token is JWT | `config_drift` — KC default JWT vs WSO2 IS 7.0.0 default **opaque** |
+| `expires_in` token lifetime | `config_drift` — 300s vs 3600s (lifetimes **not** equated) |
 
 Config checklist: [`docs/config-equivalence-case1-partial.md`](docs/config-equivalence-case1-partial.md).  
 This does **not** support “OIDC IdPs typically…” claims.

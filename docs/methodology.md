@@ -106,6 +106,7 @@ Even after config equivalence, results may be confounded by:
 | Network path asymmetry | Same Docker network; no host-vs-container split for one IdP only |
 | Non-deterministic claim sets (session ids) | Compare claim **keys** and selected semantic fields, not raw identifiers |
 | Operator error in realm export | Checklist sign-off in matrix `config_equivalence` object |
+| **Grant-type stand-in (Case 1 partial)** — programme baseline is Authorization Code + PKCE, but this partial used resource-owner **password** grant to exercise token-endpoint shape | Document in matrix/profile notes; treat token-shape fields as *expected* flow-invariant but **not independently verified** against auth-code+PKCE on the same pins; full Case 1 refresh spine must use the declared baseline flow |
 
 ---
 

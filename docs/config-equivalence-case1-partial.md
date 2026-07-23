@@ -19,4 +19,6 @@
 
 **Sign-off:** `config_equivalence.passed = false` for rows that depend on lifetimes, JWT access tokens, or claim mappings.
 
-**Allowed verdicts under this checklist:** `same` (basic token success), `config_drift` (JWT vs opaque), not `implementation_drift`.
+**Allowed verdicts under this checklist:** `same` (basic token success), `config_drift` (JWT vs opaque; `expires_in` 300 vs 3600), not `implementation_drift`.
+
+**Flow note:** This partial uses **password** grant as a stand-in for the programme baseline (Authorization Code + PKCE). Token-shape fields are *expected* to be flow-invariant; that has **not** been independently verified on these pins (see methodology §6).

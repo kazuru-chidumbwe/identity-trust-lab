@@ -48,6 +48,21 @@
       "verdict": "config_drift",
       "impact": "Migrators that decode access tokens as JWTs will see rich claim_keys_access on Keycloak and an empty set on default WSO2 IS 7.0.0 (opaque token). Equate JWT access-token settings before any implementation_drift claim on access-token claims.",
       "notes": "Honest first comparative cell for Case 1. Opaque vs JWT is a lab-config / product-default difference under unmatched equivalence checklist."
+    },
+    {
+      "feature": "token_lifetime_expires_in",
+      "expected": "expires_in matches only after access-token lifetimes are equated on the checklist; until then do not narrate as product superiority",
+      "observed": {
+        "keycloak": {
+          "expires_in": 300
+        },
+        "wso2is": {
+          "expires_in": 3600
+        }
+      },
+      "verdict": "config_drift",
+      "impact": "Clients hardcoding refresh timing or assuming a shared access-token lifetime will behave differently across these IdP defaults (300s vs 3600s). Equate token lifetimes before any implementation_drift claim on expiry semantics.",
+      "notes": "Numeric expires_in appeared in the normalize table; this row assigns the framework verdict so readers are not left to invent one. Lifetimes were explicitly NOT equated on the Case 1 partial checklist."
     }
   ]
 }
