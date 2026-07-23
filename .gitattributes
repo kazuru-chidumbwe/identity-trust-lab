@@ -1,0 +1,2 @@
+# Shell scripts must stay LF so ./scripts/*.sh run under bash (Git Bash / WSL / Linux / macOS).
+*.sh text eol=lf

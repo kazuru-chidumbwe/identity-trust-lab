@@ -61,7 +61,7 @@ Pairwise matrices validate the **instrument** on pinned versions. They do not li
 
 1. **Profile** — deterministic OIDC scenario JSON  
 2. **Drivers** — same profile bytes → each IdP → raw capture  
-3. **Normalization** — HTTP + tokens → comparable fields  
+3. **Field extraction v0** — HTTP + tokens → comparable fields (**normalization** = future semantic-mapping layer; not implemented on this pin)  
 4. **Deviation matrix** — rows with `verdict` ∈ {`same`, `config_drift`, `implementation_drift`, `undefined`, `harness_error`}
 
 ## Docs
