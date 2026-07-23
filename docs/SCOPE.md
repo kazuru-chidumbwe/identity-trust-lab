@@ -6,7 +6,7 @@
 - Deviation-matrix schema with closed `verdict` enum  
 - Keycloak token-response **normalizer**  
 - Normalize smoke gate (`./scripts/quick_test.sh`)  
-- Redacted live Keycloak capture from lab alias **stackdiff-lab**  
+- Redacted live Keycloak capture from lab alias **itl-lab**  
 
 ## Measurement discipline
 

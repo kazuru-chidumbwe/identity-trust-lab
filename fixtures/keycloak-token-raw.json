@@ -1,10 +1,10 @@
 {
   "idp": "keycloak",
-  "capture_note": "Live capture on stackdiff-lab Keycloak 26.0.7 realm=itl via password grant 2026-07-23. Public alias stackdiff-lab only. Token signatures and refresh secret redacted for public tree; claim keys preserved from live capture.",
+  "capture_note": "Live capture on itl-lab Keycloak 26.0.7 realm=itl via password grant 2026-07-23. Public alias itl-lab only. Token signatures and refresh secret redacted for public tree; claim keys preserved from live capture.",
   "http_status": 200,
   "refresh_reuse_accepted": null,
   "lab_environment": {
-    "public_alias": "stackdiff-lab",
+    "public_alias": "itl-lab",
     "uname_r": "6.8.0-134-generic",
     "keycloak_image": "quay.io/keycloak/keycloak:26.0.7",
     "realm": "itl",

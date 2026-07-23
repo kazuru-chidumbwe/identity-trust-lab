@@ -14,4 +14,4 @@ When a matrix or capture is published as evidence, cite the **Git tag** (not nec
 
 ## Lab environment
 
-Live Keycloak normalize smoke used public alias **stackdiff-lab**, image `quay.io/keycloak/keycloak:26.0.7`, kernel release recorded in the fixture `lab_environment` object.
+Live Keycloak normalize smoke used public alias **itl-lab**, image `quay.io/keycloak/keycloak:26.0.7`, kernel release recorded in the fixture `lab_environment` object.

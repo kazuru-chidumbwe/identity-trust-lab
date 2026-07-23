@@ -12,7 +12,7 @@ Not a product shootout. Not a conformance suite. Synthetic / lab IdPs only.
 | Methodology | [`docs/methodology.md`](docs/methodology.md) |
 | Related work | [`docs/RELATED-WORK.md`](docs/RELATED-WORK.md) |
 | Keycloak normalize | `./scripts/quick_test.sh` green |
-| Lab pin (normalize smoke) | stackdiff-lab · Keycloak 26.0.7 · `uname_r` 6.8.0-134-generic · claim keys from live JWTs (signatures/refresh redacted in public fixture) |
+| Lab pin (normalize smoke) | itl-lab · Keycloak 26.0.7 · `uname_r` 6.8.0-134-generic · claim keys from live JWTs (signatures/refresh redacted in public fixture) |
 
 ## Quick start
 
