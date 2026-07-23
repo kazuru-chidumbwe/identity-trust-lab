@@ -9,7 +9,9 @@
   },
   "config_equivalence": {
     "passed": false,
-    "notes": "Grant type and requested scopes matched (password + openid profile email). Access/refresh lifetimes NOT equated (KC realm default 300s vs WSO2 default 3600s). JWT access-token issuance NOT equated (KC default JWT; WSO2 IS 7.0.0 default opaque). Claim-attribute mappings NOT equated (WSO2 ID token lacked email/profile claims despite scopes)."
+    "checklist_id": "CE-TOKEN-SHAPE-v0",
+    "checklist_path": "results/case1-partial/config-equivalence-CE-TOKEN-SHAPE-v0.json",
+    "notes": "Grant type and requested scopes matched (password + openid profile email). Access/refresh lifetimes NOT equated (KC 300s vs WSO2 3600s). JWT access-token issuance NOT equated (KC JWT; WSO2 opaque). Claim-attribute mapping proxy NOT equated. See CE-TOKEN-SHAPE-v0 for observables, evidence paths, and thresholds."
   },
   "rows": [
     {
@@ -47,7 +49,7 @@
       },
       "verdict": "config_drift",
       "impact": "Migrators that decode access tokens as JWTs will see rich claim_keys_access on Keycloak and an empty set on default WSO2 IS 7.0.0 (opaque token). Equate JWT access-token settings before any implementation_drift claim on access-token claims.",
-      "notes": "Honest first comparative cell for Case 1. Opaque vs JWT is a lab-config / product-default difference under unmatched equivalence checklist."
+      "notes": "Honest comparative cell for this partial lab evidence pin. Opaque vs JWT is a lab-config / product-default difference under unmatched equivalence checklist."
     },
     {
       "feature": "token_lifetime_expires_in",
@@ -62,7 +64,7 @@
       },
       "verdict": "config_drift",
       "impact": "Clients hardcoding refresh timing or assuming a shared access-token lifetime will behave differently across these IdP defaults (300s vs 3600s). Equate token lifetimes before any implementation_drift claim on expiry semantics.",
-      "notes": "Numeric expires_in appeared in the normalize table; this row assigns the framework verdict so readers are not left to invent one. Lifetimes were explicitly NOT equated on the Case 1 partial checklist."
+      "notes": "Numeric expires_in from field extraction v0; this row assigns the framework verdict so readers are not left to invent one. Lifetimes were explicitly NOT equated on CE-TOKEN-SHAPE-v0."
     }
   ]
 }

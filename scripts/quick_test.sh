@@ -37,8 +37,14 @@ assert m["rows"][2]["feature"] == "token_lifetime_expires_in" and m["rows"][2]["
 assert m["rows"][2]["observed"]["keycloak"]["expires_in"] == 300
 assert m["rows"][2]["observed"]["wso2is"]["expires_in"] == 3600
 assert m["config_equivalence"]["passed"] is False
-assert len(m["rows"]) == 3
+assert m["config_equivalence"].get("checklist_id") == "CE-TOKEN-SHAPE-v0"
+ce = json.loads(Path("results/case1-partial/config-equivalence-CE-TOKEN-SHAPE-v0.json").read_text())
+assert ce["passed"] is False
+assert ce["checklist_id"] == "CE-TOKEN-SHAPE-v0"
+assert any(i["id"] == "access_token_lifetime_expires_in" and i["equated"] is False for i in ce["items"])
+assert any(i["id"] == "access_token_jwt" and i["equated"] is False for i in ce["items"])
 print("PASS case1 partial matrix present (", len(m["rows"]), "rows)")
+print("PASS config-equivalence CE-TOKEN-SHAPE-v0 present (passed=false)")
 PY
 
-echo "PASS: dual-IdP Case 1 partial smoke green."
+echo "PASS: dual-IdP partial lab evidence smoke green."

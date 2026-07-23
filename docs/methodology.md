@@ -6,7 +6,7 @@
 
 ## 1. Goal
 
-Under **identical** OIDC profiles, execute the same client inputs against independent IdP implementations, **normalize** responses to a fixed field set, and emit a **deviation matrix** whose cells use a closed verdict vocabulary.
+Under **identical** OIDC profiles, execute the same client inputs against independent IdP implementations, run **field extraction v0** to a fixed field set, and emit a **deviation matrix** whose cells use a closed verdict vocabulary.
 
 We measure **benign protocol semantics** (migration-relevant behaviour), not conformance pass/fail and not attack success rates.
 
@@ -36,24 +36,26 @@ A two-IdP matrix on pinned versions is an **existence proof that the instrument 
 
 ---
 
-## 3. Calibration — configuration equivalence
+## 3. Calibration — configuration equivalence (operational)
 
-Before any row may carry verdict `implementation_drift`, compared IdPs must pass a documented **config-equivalence** checklist for the lab realm/client:
+Before any row may carry verdict `implementation_drift`, compared IdPs must pass a **versioned, machine-checkable** config-equivalence checklist:
 
-- Access / refresh / ID token lifetimes  
-- Refresh rotation enabled/disabled (matched)  
-- Session vs offline access mode  
-- PKCE required  
-- Claim mappings for the test client  
-- Clock skew tolerance  
+- Schema: [`schemas/config-equivalence.schema.json`](../schemas/config-equivalence.schema.json)  
+- Protocol: [`docs/config-equivalence-protocol.md`](config-equivalence-protocol.md)  
+- Each item: observable · how_checked · evidence pointers · per-IdP values · compare/threshold · `equated` · whether required for the drift gate  
 
-Failures → row verdict `config_drift` (or exclude the row). Config drift must not be narrated as product inferiority.
+**Gate:** `implementation_drift` only if checklist `passed == true`. Otherwise use `config_drift` (or `undefined` / `harness_error`).
+
+Failures on required items → row verdict `config_drift` (or exclude the row). Config drift must not be narrated as product inferiority.
+
 
 ---
 
-## 4. Field extraction (normalization v0 / minimal)
+## 4. Field extraction v0 (current pipeline)
 
-Raw responses are not compared with unstructured diffs. The current pipeline is a **minimal field extractor** — not a full semantic rule base. It pulls a fixed set of comparable fields from the token-endpoint HTTP response (and JWT claim **keys** when the token is a JWT). Calling this “normalization” in the architecture sense is aspirational; Case 1 partial evidence is **extracted raw fields** under that fixed schema.
+**Terminology lock:** the implemented pipeline is **field extraction v0**. The word **normalization** is reserved for a future fuller semantic-mapping layer (not implemented on this pin). Artifact filenames under `artifacts/normalize-smoke/` are historical path names; they contain extracted fields.
+
+Raw responses are not compared with unstructured diffs. Field extraction v0 pulls a fixed set of comparable fields from the token-endpoint HTTP response (and JWT claim **keys** when the token is a JWT).
 
 | Field | Meaning |
 | --- | --- |
@@ -67,7 +69,8 @@ Raw responses are not compared with unstructured diffs. The current pipeline is 
 | `claim_keys_access` | Sorted list of access-token claim names when JWT |
 | `access_token_is_jwt` | Whether the access token parses as a JWT |
 
-Richer semantic mapping (e.g. equated claim ontologies, refresh-reuse outcomes under auth-code+PKCE) is future work. Public artifacts remain programme-neutral.
+Public artifacts remain programme-neutral.
+
 
 ---
 
@@ -81,7 +84,7 @@ A matrix cell is **not** a bare boolean and **not** free text alone.
 | --- | --- |
 | `same` | Normalized observations match under the profile assertion |
 | `config_drift` | Difference explained by failed/unequal config equivalence |
-| `implementation_drift` | Config-equivalent setups still disagree on normalized fields |
+| `implementation_drift` | Config-equivalent setups still disagree on extracted fields |
 | `undefined` | Spec/profile does not determine expected behaviour tightly enough |
 | `harness_error` | Measurement failure (timeout, driver bug, parse error) — not an IdP finding |
 

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kazuru-chidumbwe/identity-trust-lab/schemas/config-equivalence.schema.json",
+  "title": "Config equivalence checklist (machine-checkable)",
+  "description": "Observable, versioned equivalence items. implementation_drift is forbidden unless passed==true.",
+  "type": "object",
+  "required": [
+    "checklist_id",
+    "version",
+    "profile_id",
+    "idp_versions",
+    "created_utc",
+    "items",
+    "passed",
+    "implementation_drift_gate"
+  ],
+  "properties": {
+    "checklist_id": { "type": "string" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "profile_id": { "type": "string" },
+    "idp_versions": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "minProperties": 2
+    },
+    "created_utc": { "type": "string", "format": "date-time" },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/item" }
+    },
+    "passed": {
+      "type": "boolean",
+      "description": "true iff every item with required_for_implementation_drift==true has equated==true"
+    },
+    "implementation_drift_gate": {
+      "type": "string",
+      "description": "Human-readable rule binding passed → allowed verdicts"
+    },
+    "notes": { "type": "string" }
+  },
+  "$defs": {
+    "item": {
+      "type": "object",
+      "required": [
+        "id",
+        "observable",
+        "how_checked",
+        "evidence",
+        "values",
+        "compare",
+        "equated",
+        "required_for_implementation_drift"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "observable": {
+          "type": "string",
+          "description": "What is observed (not a hope)"
+        },
+        "how_checked": {
+          "type": "string",
+          "description": "Procedure or script that produces evidence"
+        },
+        "evidence": {
+          "type": "object",
+          "description": "Pointers to stored evidence (fixture paths, extracted fields, lab notes)",
+          "additionalProperties": { "type": "string" }
+        },
+        "values": {
+          "type": "object",
+          "description": "Per-IdP observed value",
+          "additionalProperties": true
+        },
+        "compare": {
+          "type": "string",
+          "enum": ["exact", "set_eq", "numeric_eq", "both_n_a", "presence_eq"]
+        },
+        "threshold": {
+          "type": "string",
+          "description": "Pass/fail rule for this item (e.g. exact string; abs diff == 0)"
+        },
+        "equated": { "type": "boolean" },
+        "required_for_implementation_drift": {
+          "type": "boolean",
+          "description": "If true and equated==false, matrix must not use implementation_drift"
+        },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -21,6 +21,8 @@
       "description": "Checklist outcomes before rows may use implementation_drift",
       "properties": {
         "passed": { "type": "boolean" },
+        "checklist_id": { "type": "string" },
+        "checklist_path": { "type": "string" },
         "notes": { "type": "string" }
       }
     },

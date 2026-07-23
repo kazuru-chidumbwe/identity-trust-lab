@@ -1,24 +1,23 @@
-# Config equivalence — Case 1 partial (2026-07-23)
+# Config equivalence — human summary for `P-TOKEN-SHAPE-v0` (2026-07-23)
 
-**Lab alias:** itl-lab  
-**IdPs:** Keycloak `26.0.7` · WSO2 IS `7.0.0`  
-**Profile:** `P-TOKEN-SHAPE-v0` (lab password grant + `openid profile email`; token-endpoint shape only — not refresh reuse)
+**Machine-checkable record:** [`../results/case1-partial/config-equivalence-CE-TOKEN-SHAPE-v0.json`](../results/case1-partial/config-equivalence-CE-TOKEN-SHAPE-v0.json)  
+**Protocol:** [`config-equivalence-protocol.md`](config-equivalence-protocol.md)
 
-| Checklist item | Keycloak | WSO2 IS | Equated? |
+**Lab alias:** itl-lab · Keycloak `26.0.7` · WSO2 IS `7.0.0`  
+**`passed`:** **false** → no `implementation_drift` rows on this pin
+
+| Item id | Equated? | Required for drift gate? | Threshold (short) |
 | --- | --- | --- | --- |
-| Grant type | password | password | **yes** |
-| Requested scopes | openid profile email | openid profile email | **yes** |
-| Access token lifetime | 300s (realm default in capture) | 3600s (product default) | **no** |
-| Refresh issued | yes | yes | **yes** (presence) |
-| Refresh lifetime / rotation | not measured this row | not measured this row | **n/a** |
-| PKCE | n/a (password) | n/a | **n/a** |
-| JWT access token | default **JWT** | default **opaque** | **no** |
-| ID claim attribute mapping | email/profile claims present | email/profile claims **absent** on id_token | **no** |
-| HTTP client | Python urllib | Python urllib | **yes** |
-| Host | itl-lab (`uname_r` 6.8.0-134-generic) | same | **yes** |
+| `grant_type` | yes | yes | exact `password` |
+| `requested_scopes` | yes | yes | set equality `{openid,profile,email}` |
+| `access_token_lifetime_expires_in` | **no** (300 vs 3600) | yes | integer equality |
+| `refresh_token_presence` | yes | no | both `refresh_issued` |
+| `refresh_lifetime_or_rotation` | n/a both | no | out of scope for this profile |
+| `pkce` | n/a both | no | password grant |
+| `access_token_jwt` | **no** (true vs false) | yes | boolean equality |
+| `id_token_claim_key_set_email_profile` | **no** | yes | `email` ∈ claim_keys_id |
+| `http_client` | yes | yes | both urllib |
+| `lab_host` | yes | yes | same alias + `uname_r` |
+| `clock_skew_tolerance` | **not checked** | no | unset on this pin |
 
-**Sign-off:** `config_equivalence.passed = false` for rows that depend on lifetimes, JWT access tokens, or claim mappings.
-
-**Allowed verdicts under this checklist:** `same` (basic token success), `config_drift` (JWT vs opaque; `expires_in` 300 vs 3600), not `implementation_drift`.
-
-**Flow note:** This partial uses **password** grant as a stand-in for the programme baseline (Authorization Code + PKCE). Token-shape fields are *expected* to be flow-invariant; that has **not** been independently verified on these pins (see methodology §6).
+**Flow note:** password grant stand-in vs future `P-REFRESH-REUSE-v0` (auth-code+PKCE) — see methodology threats.

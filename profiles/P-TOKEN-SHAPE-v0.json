@@ -1,7 +1,7 @@
 {
   "id": "P-TOKEN-SHAPE-v0",
   "version": "0.1",
-  "description": "Case 1 partial: compare token-endpoint shape fields under matched grant+scopes. Lab uses resource-owner password grant (not the programme auth-code+PKCE baseline). Does NOT exercise refresh reuse or rotation — that belongs to P-REFRESH-REUSE-v0 when that spine is run.",
+  "description": "Partial lab evidence: compare token-endpoint shape fields under matched grant+scopes. Lab uses resource-owner password grant (not the programme auth-code+PKCE baseline). Does NOT exercise refresh reuse or rotation — that belongs to P-REFRESH-REUSE-v0 when that spine is run. Pipeline: field extraction v0.",
   "flow": "resource_owner_password",
   "spine": "token_endpoint_shape",
   "client": {

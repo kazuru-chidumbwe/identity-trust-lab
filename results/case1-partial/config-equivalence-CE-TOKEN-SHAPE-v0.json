@@ -1,0 +1,183 @@
+{
+  "checklist_id": "CE-TOKEN-SHAPE-v0",
+  "version": "0.1",
+  "profile_id": "P-TOKEN-SHAPE-v0",
+  "idp_versions": {
+    "keycloak": "quay.io/keycloak/keycloak:26.0.7",
+    "wso2is": "wso2/wso2is:7.0.0"
+  },
+  "created_utc": "2026-07-23T16:30:00Z",
+  "passed": false,
+  "implementation_drift_gate": "implementation_drift allowed only when passed==true (every required_for_implementation_drift item equated). Otherwise only same | config_drift | undefined | harness_error.",
+  "notes": "Partial lab evidence for P-TOKEN-SHAPE-v0 on itl-lab. Not a generalization about IdPs.",
+  "items": [
+    {
+      "id": "grant_type",
+      "observable": "OAuth grant_type used in the token request",
+      "how_checked": "Read lab_environment.grant on each redacted fixture; must equal request used by capture scripts",
+      "evidence": {
+        "keycloak": "fixtures/keycloak-token-raw.json#lab_environment.grant",
+        "wso2is": "fixtures/wso2-token-raw.json#lab_environment.grant"
+      },
+      "values": { "keycloak": "password", "wso2is": "password" },
+      "compare": "exact",
+      "threshold": "string equality",
+      "equated": true,
+      "required_for_implementation_drift": true
+    },
+    {
+      "id": "requested_scopes",
+      "observable": "scope string sent on the token request / returned scope field",
+      "how_checked": "Capture scripts set scope=openid profile email; confirm body.scope tokens cover the same three names (order-insensitive)",
+      "evidence": {
+        "keycloak": "fixtures/keycloak-token-raw.json#body.scope",
+        "wso2is": "fixtures/wso2-token-raw.json#body.scope"
+      },
+      "values": {
+        "keycloak": ["email", "openid", "profile"],
+        "wso2is": ["email", "openid", "profile"]
+      },
+      "compare": "set_eq",
+      "threshold": "same set of scope names",
+      "equated": true,
+      "required_for_implementation_drift": true
+    },
+    {
+      "id": "access_token_lifetime_expires_in",
+      "observable": "expires_in integer from token-endpoint JSON",
+      "how_checked": "Field extraction v0: compare artifacts/*/expires_in (or fixture body.expires_in)",
+      "evidence": {
+        "keycloak": "artifacts/normalize-smoke/keycloak-normalized.json#expires_in",
+        "wso2is": "artifacts/normalize-smoke/wso2-normalized.json#expires_in"
+      },
+      "values": { "keycloak": 300, "wso2is": 3600 },
+      "compare": "numeric_eq",
+      "threshold": "integer equality (no tolerance on this pin)",
+      "equated": false,
+      "required_for_implementation_drift": true,
+      "notes": "Defaults not retuned before capture → config_drift on token_lifetime_expires_in"
+    },
+    {
+      "id": "refresh_token_presence",
+      "observable": "Whether a refresh_token string was returned",
+      "how_checked": "Field extraction v0: refresh_issued boolean",
+      "evidence": {
+        "keycloak": "artifacts/normalize-smoke/keycloak-normalized.json#refresh_issued",
+        "wso2is": "artifacts/normalize-smoke/wso2-normalized.json#refresh_issued"
+      },
+      "values": { "keycloak": true, "wso2is": true },
+      "compare": "exact",
+      "threshold": "boolean equality",
+      "equated": true,
+      "required_for_implementation_drift": false,
+      "notes": "Presence only; refresh lifetime/rotation not measured on this profile"
+    },
+    {
+      "id": "refresh_lifetime_or_rotation",
+      "observable": "Refresh lifetime and rotation policy",
+      "how_checked": "Not exercised by P-TOKEN-SHAPE-v0 (belongs to P-REFRESH-REUSE-v0)",
+      "evidence": {
+        "keycloak": "n/a",
+        "wso2is": "n/a"
+      },
+      "values": { "keycloak": null, "wso2is": null },
+      "compare": "both_n_a",
+      "threshold": "both n/a",
+      "equated": true,
+      "required_for_implementation_drift": false,
+      "notes": "equated=true only because both sides are n/a for this profile — not a claim that rotation matches"
+    },
+    {
+      "id": "pkce",
+      "observable": "PKCE required on the client",
+      "how_checked": "N/A for resource_owner_password; profile.client.pkce == false on both",
+      "evidence": {
+        "profile": "profiles/P-TOKEN-SHAPE-v0.json#client.pkce"
+      },
+      "values": { "keycloak": "n/a", "wso2is": "n/a" },
+      "compare": "both_n_a",
+      "threshold": "both n/a",
+      "equated": true,
+      "required_for_implementation_drift": false
+    },
+    {
+      "id": "access_token_jwt",
+      "observable": "Whether access_token parses as JWT (three base64url segments)",
+      "how_checked": "Field extraction v0: access_token_is_jwt",
+      "evidence": {
+        "keycloak": "artifacts/normalize-smoke/keycloak-normalized.json#access_token_is_jwt",
+        "wso2is": "artifacts/normalize-smoke/wso2-normalized.json#access_token_is_jwt"
+      },
+      "values": { "keycloak": true, "wso2is": false },
+      "compare": "exact",
+      "threshold": "boolean equality",
+      "equated": false,
+      "required_for_implementation_drift": true,
+      "notes": "Product defaults not equated → config_drift on access_token_is_jwt"
+    },
+    {
+      "id": "id_token_claim_key_set_email_profile",
+      "observable": "Whether id_token claim-key set includes email and preferred_username (or name) after requesting profile+email scopes",
+      "how_checked": "Field extraction v0: membership of email in claim_keys_id (minimal proxy for claim-mapping equivalence on this pin)",
+      "evidence": {
+        "keycloak": "artifacts/normalize-smoke/keycloak-normalized.json#claim_keys_id",
+        "wso2is": "artifacts/normalize-smoke/wso2-normalized.json#claim_keys_id"
+      },
+      "values": {
+        "keycloak": { "has_email": true },
+        "wso2is": { "has_email": false }
+      },
+      "compare": "exact",
+      "threshold": "has_email boolean equality",
+      "equated": false,
+      "required_for_implementation_drift": true,
+      "notes": "Not a full claim ontology; sufficient to block implementation_drift on claim-set rows"
+    },
+    {
+      "id": "http_client",
+      "observable": "HTTP client library used by both drivers",
+      "how_checked": "Code review of capture scripts (both Python urllib)",
+      "evidence": {
+        "keycloak": "scripts/keycloak_live_capture.py",
+        "wso2is": "scripts/wso2_live_capture.py"
+      },
+      "values": { "keycloak": "urllib", "wso2is": "urllib" },
+      "compare": "exact",
+      "threshold": "same library name",
+      "equated": true,
+      "required_for_implementation_drift": true
+    },
+    {
+      "id": "lab_host",
+      "observable": "Public lab alias + kernel release",
+      "how_checked": "lab_environment.public_alias and uname_r on fixtures",
+      "evidence": {
+        "keycloak": "fixtures/keycloak-token-raw.json#lab_environment",
+        "wso2is": "fixtures/wso2-token-raw.json#lab_environment"
+      },
+      "values": {
+        "keycloak": { "public_alias": "itl-lab", "uname_r": "6.8.0-134-generic" },
+        "wso2is": { "public_alias": "itl-lab", "uname_r": "6.8.0-134-generic" }
+      },
+      "compare": "exact",
+      "threshold": "public_alias and uname_r equality",
+      "equated": true,
+      "required_for_implementation_drift": true
+    },
+    {
+      "id": "clock_skew_tolerance",
+      "observable": "Configured clock-skew / time sync between IdP containers",
+      "how_checked": "Not instrumented on this pin (no chrony probe recorded)",
+      "evidence": {
+        "keycloak": "unset",
+        "wso2is": "unset"
+      },
+      "values": { "keycloak": null, "wso2is": null },
+      "compare": "both_n_a",
+      "threshold": "both unset → equated=false for drift gate if a row depended on wall-clock; this pin's rows do not",
+      "equated": false,
+      "required_for_implementation_drift": false,
+      "notes": "Recorded as not checked. Does not unlock implementation_drift."
+    }
+  ]
+}

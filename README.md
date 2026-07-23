@@ -1,8 +1,8 @@
 # Identity Trust Lab
 
-Reusable **OIDC semantic measurement** framework: identical profiles across identity providers → normalized traces → deviation matrix.
+Reusable **OIDC semantic measurement** framework: identical profiles across identity providers → **field extraction v0** → deviation matrix.
 
-Not a product shootout. Not a conformance suite. Synthetic / lab IdPs only.
+Not a product shootout. Not a conformance suite. Synthetic / lab IdPs only. **Normalization** (full semantic mapping) is a future layer.
 
 ## Status
 
@@ -24,7 +24,7 @@ cd identity-trust-lab
 # → PASS; Keycloak + WSO2 normalize + Case 1 partial matrix checks
 ```
 
-## Case 1 partial finding (instrument validation)
+## Partial lab evidence (instrument validation)
 
 Under matched grant + scopes on itl-lab (`P-TOKEN-SHAPE-v0`):
 
@@ -34,8 +34,10 @@ Under matched grant + scopes on itl-lab (`P-TOKEN-SHAPE-v0`):
 | Access token is JWT | `config_drift` — KC default JWT vs WSO2 IS 7.0.0 default **opaque** |
 | `expires_in` token lifetime | `config_drift` — 300s vs 3600s (lifetimes **not** equated) |
 
-Config checklist: [`docs/config-equivalence-case1-partial.md`](docs/config-equivalence-case1-partial.md).  
-This does **not** support “OIDC IdPs typically…” claims.
+Operational checklist: [`results/case1-partial/config-equivalence-CE-TOKEN-SHAPE-v0.json`](results/case1-partial/config-equivalence-CE-TOKEN-SHAPE-v0.json) (`passed: false`).  
+Protocol: [`docs/config-equivalence-protocol.md`](docs/config-equivalence-protocol.md).  
+
+**Not** a claim about IdPs in general — pinned lab snapshot only. Pipeline term: **field extraction v0** (normalization = future layer).
 
 Optional live re-capture:
 
