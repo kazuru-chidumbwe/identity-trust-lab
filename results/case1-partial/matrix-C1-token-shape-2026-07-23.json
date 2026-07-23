@@ -1,6 +1,6 @@
 {
   "matrix_id": "C1-partial-token-shape-2026-07-23",
-  "profile_id": "P-PASSWORD-OPENID-v0",
+  "profile_id": "P-TOKEN-SHAPE-v0",
   "created_utc": "2026-07-23T16:30:00Z",
   "git_tag": "case1-partial-2026-07",
   "idp_versions": {

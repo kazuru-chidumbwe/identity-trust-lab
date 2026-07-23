@@ -1,7 +1,7 @@
 {
-  "id": "P-PASSWORD-OPENID-v0",
+  "id": "P-TOKEN-SHAPE-v0",
   "version": "0.1",
-  "description": "Lab-only password grant to exercise token-endpoint normalization on both IdPs. Not production-recommended. Authorization Code + PKCE remains the programme baseline for the full Case 1 refresh spine.",
+  "description": "Case 1 partial: compare token-endpoint shape fields under matched grant+scopes. Lab uses resource-owner password grant (not the programme auth-code+PKCE baseline). Does NOT exercise refresh reuse or rotation — that belongs to P-REFRESH-REUSE-v0 when that spine is run.",
   "flow": "resource_owner_password",
   "spine": "token_endpoint_shape",
   "client": {

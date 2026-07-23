@@ -26,7 +26,7 @@ cd identity-trust-lab
 
 ## Case 1 partial finding (instrument validation)
 
-Under matched grant + scopes on itl-lab (`P-PASSWORD-OPENID-v0`):
+Under matched grant + scopes on itl-lab (`P-TOKEN-SHAPE-v0`):
 
 | Feature | Verdict |
 | --- | --- |

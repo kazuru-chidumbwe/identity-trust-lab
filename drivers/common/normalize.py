@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Normalize raw OIDC token-endpoint material into comparable fields.
+"""Extract a fixed comparable field set from raw OIDC token-endpoint material (v0 / minimal).
 
+This is field extraction, not a full semantic normalization rule base.
 Shared across IdP drivers (Keycloak, WSO2, …).
 """
 

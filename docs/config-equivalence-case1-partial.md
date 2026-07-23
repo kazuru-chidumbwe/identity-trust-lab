@@ -2,7 +2,7 @@
 
 **Lab alias:** itl-lab  
 **IdPs:** Keycloak `26.0.7` · WSO2 IS `7.0.0`  
-**Profile:** `P-PASSWORD-OPENID-v0` (lab password grant + `openid profile email`)
+**Profile:** `P-TOKEN-SHAPE-v0` (lab password grant + `openid profile email`; token-endpoint shape only — not refresh reuse)
 
 | Checklist item | Keycloak | WSO2 IS | Equated? |
 | --- | --- | --- | --- |

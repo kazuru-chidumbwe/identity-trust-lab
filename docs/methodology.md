@@ -51,15 +51,15 @@ Failures → row verdict `config_drift` (or exclude the row). Config drift must 
 
 ---
 
-## 4. Normalization
+## 4. Field extraction (normalization v0 / minimal)
 
-Raw responses are not compared with unstructured diffs. The normalizer emits at least:
+Raw responses are not compared with unstructured diffs. The current pipeline is a **minimal field extractor** — not a full semantic rule base. It pulls a fixed set of comparable fields from the token-endpoint HTTP response (and JWT claim **keys** when the token is a JWT). Calling this “normalization” in the architecture sense is aspirational; Case 1 partial evidence is **extracted raw fields** under that fixed schema.
 
 | Field | Meaning |
 | --- | --- |
 | `http_status` | Token endpoint status |
 | `error` / `error_description` | Present if OAuth error |
-| `token_type` | Normalized string or null |
+| `token_type` | String or null |
 | `expires_in` | Integer seconds or null |
 | `refresh_issued` | boolean |
 | `refresh_reuse_accepted` | boolean or null if not exercised |
@@ -67,7 +67,7 @@ Raw responses are not compared with unstructured diffs. The normalizer emits at 
 | `claim_keys_access` | Sorted list of access-token claim names when JWT |
 | `access_token_is_jwt` | Whether the access token parses as a JWT |
 
-Public artifacts remain programme-neutral.
+Richer semantic mapping (e.g. equated claim ontologies, refresh-reuse outcomes under auth-code+PKCE) is future work. Public artifacts remain programme-neutral.
 
 ---
 
