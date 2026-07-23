@@ -1,0 +1,25 @@
+{
+  "access_token_is_jwt": false,
+  "claim_keys_access": [],
+  "claim_keys_id": [
+    "amr",
+    "at_hash",
+    "aud",
+    "azp",
+    "exp",
+    "iat",
+    "iss",
+    "jti",
+    "nbf",
+    "org_id",
+    "org_name",
+    "sub"
+  ],
+  "error": null,
+  "error_description": null,
+  "expires_in": 3600,
+  "http_status": 200,
+  "refresh_issued": true,
+  "refresh_reuse_accepted": null,
+  "token_type": "Bearer"
+}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Keycloak driver entry — delegates to shared normalizer."""
+"""WSO2 IS driver entry — delegates to shared normalizer."""
 
 from __future__ import annotations
 

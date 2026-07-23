@@ -10,11 +10,11 @@
     "description": { "type": "string" },
     "flow": {
       "type": "string",
-      "enum": ["authorization_code_pkce"]
+      "enum": ["authorization_code_pkce", "resource_owner_password"]
     },
     "spine": {
       "type": "string",
-      "enum": ["refresh_token"]
+      "enum": ["refresh_token", "token_endpoint_shape"]
     },
     "client": {
       "type": "object",

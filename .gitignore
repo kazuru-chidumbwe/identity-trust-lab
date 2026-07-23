@@ -8,6 +8,8 @@ logs/*.log
 !logs/README.md
 results/*.json
 !results/README.md
+!results/case1-partial/
+!results/case1-partial/**
 # keep normalize-smoke artifact committed as the executable shape demo
 artifacts/**
 !artifacts/normalize-smoke/

@@ -17,7 +17,7 @@ p = Path("artifacts/normalize-smoke/keycloak-normalized.json")
 n = json.loads(p.read_text())
 required = [
     "http_status", "error", "token_type", "expires_in",
-    "refresh_issued", "claim_keys_id", "claim_keys_access",
+    "refresh_issued", "claim_keys_id", "claim_keys_access", "access_token_is_jwt",
 ]
 missing = [k for k in required if k not in n]
 if missing:
@@ -28,6 +28,9 @@ if n["http_status"] != 200 or not n["refresh_issued"]:
     sys.exit(1)
 if "sub" not in n["claim_keys_id"]:
     print("FAIL id token keys missing sub", n["claim_keys_id"])
+    sys.exit(1)
+if n.get("access_token_is_jwt") is not True:
+    print("FAIL expected JWT access token for Keycloak pin", n)
     sys.exit(1)
 print("PASS normalize smoke →", p)
 print(json.dumps(n, indent=2, sort_keys=True))

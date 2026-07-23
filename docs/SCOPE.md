@@ -1,21 +1,21 @@
 # Scope
 
-## In this tree
+## In scope (public tree)
 
-- Profile schema + example refresh-spine profile  
-- Deviation-matrix schema with closed `verdict` enum  
-- Keycloak token-response **normalizer**  
-- Normalize smoke gate (`./scripts/quick_test.sh`)  
-- Redacted live Keycloak capture from lab alias **itl-lab**  
+- OIDC profile + matrix schemas with closed `verdict` enum
+- Shared token-response **normalizer** (`drivers/common`)
+- Keycloak + WSO2 IS drivers (normalize entrypoints)
+- Redacted live captures from lab alias **itl-lab**
+- Case 1 **partial** matrix (token-endpoint shape): Keycloak 26.0.7 vs WSO2 IS 7.0.0
 
-## Measurement discipline
+## Out of scope (this tree)
 
-- Synthetic / lab IdPs only  
-- Programme-neutral public artifacts (claim **keys**, not PII values)  
-- Cite **Git tags** for frozen measurements — not necessarily `main`  
-- Config equivalence before `implementation_drift`  
-- Security-relevant rows: disclosure before public exploit-flavoured language  
+- Product rankings or marketing comparisons
+- Conformance certification claims
+- Offensive exploit write-ups
+- Unredacted production tokens or realm exports
+- Venue / paper submission roadmaps
 
-## Platforms
+## Drivers
 
-Drivers are IdP-specific. This repository’s public normalize path is exercised on **Keycloak**. Additional IdP drivers use the same profile and matrix contracts when present.
+Drivers are IdP-specific. Public normalize paths are exercised on **Keycloak** and **WSO2 Identity Server**. Additional IdP drivers use the same profile and matrix contracts when present.

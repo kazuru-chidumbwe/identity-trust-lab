@@ -1,0 +1,23 @@
+{
+  "idp": "wso2is",
+  "capture_note": "Live capture on itl-lab WSO2 IS 7.0.0 via password grant. Public alias itl-lab. Token signatures and refresh secret redacted; claim keys preserved.",
+  "http_status": 200,
+  "refresh_reuse_accepted": null,
+  "lab_environment": {
+    "public_alias": "itl-lab",
+    "wso2_image": "wso2/wso2is:7.0.0",
+    "base_url": "https://127.0.0.1:9443",
+    "client_id": "itl_lab_wso2_client",
+    "grant": "password",
+    "scope": "openid profile email",
+    "uname_r": "6.8.0-134-generic"
+  },
+  "body": {
+    "access_token": "0aedbfd6-16af-3d03-b944-98e2e397d507",
+    "refresh_token": "redacted-live-refresh",
+    "scope": "email openid profile",
+    "id_token": "eyJ4NXQiOiJPV1JpTXpaaVlURXhZVEl4WkdGa05UVTJOVE0zTWpkaFltTmxNVFZrTnpRMU56a3paVGc1TVRrNE0yWmxOMkZoWkdaalpURmlNemxsTTJJM1l6ZzJNZyIsImtpZCI6Ik9XUmlNelppWVRFeFlUSXhaR0ZrTlRVMk5UTTNNamRoWW1ObE1UVmtOelExTnprelpUZzVNVGs0TTJabE4yRmhaR1pqWlRGaU16bGxNMkkzWXpnMk1nX1JTMjU2IiwiYWxnIjoiUlMyNTYifQ.eyJhdF9oYXNoIjoiOV9uQ19wbWZpRXZrSlBMUkZiT3RVZyIsImF1ZCI6Iml0bF9sYWJfd3NvMl9jbGllbnQiLCJzdWIiOiI0ZDQ1ODUxYy1lZmNlLTQ3ODgtODExOC0xMmViOTQzZTJkZjQiLCJuYmYiOjE3ODQ4MjQzNjUsImF6cCI6Iml0bF9sYWJfd3NvMl9jbGllbnQiLCJvcmdfaWQiOiIxMDA4NGE4ZC0xMTNmLTQyMTEtYTBkNS1lZmUzNmIwODIyMTEiLCJhbXIiOlsicGFzc3dvcmQiXSwiaXNzIjoiaHR0cHM6XC9cL2xvY2FsaG9zdDo5NDQzXC9vYXV0aDJcL3Rva2VuIiwiZXhwIjoxNzg0ODI3OTY1LCJvcmdfbmFtZSI6IlN1cGVyIiwiaWF0IjoxNzg0ODI0MzY1LCJqdGkiOiJhYjFiNThjNi0xNGRiLTQ2NWEtYjFkNC04ZTZkOWU1NjBhMTgifQ.REDACTED_LIVE_SIG",
+    "token_type": "Bearer",
+    "expires_in": 3600
+  }
+}

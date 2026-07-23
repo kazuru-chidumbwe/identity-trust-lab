@@ -1,4 +1,5 @@
 {
+  "access_token_is_jwt": true,
   "claim_keys_access": [
     "acr",
     "allowed-origins",

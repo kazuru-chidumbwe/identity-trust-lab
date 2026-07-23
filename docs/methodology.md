@@ -65,6 +65,7 @@ Raw responses are not compared with unstructured diffs. The normalizer emits at 
 | `refresh_reuse_accepted` | boolean or null if not exercised |
 | `claim_keys_id` | Sorted list of ID-token claim names (no PII values in public artifacts) |
 | `claim_keys_access` | Sorted list of access-token claim names when JWT |
+| `access_token_is_jwt` | Whether the access token parses as a JWT |
 
 Public artifacts remain programme-neutral.
 

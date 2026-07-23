@@ -1,10 +1,40 @@
 #!/usr/bin/env bash
-# Smoke gate: Keycloak normalize path.
+# Smoke gate: Keycloak + WSO2 normalize paths + Case 1 partial matrix present.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-echo "== identity-trust-lab quick_test =="
 bash scripts/normalize_smoke.sh
-echo ""
-echo "PASS: normalize smoke green."
-exit 0
+
+OUT_W="artifacts/normalize-smoke/wso2-normalized.json"
+python3 drivers/wso2/normalize.py fixtures/wso2-token-raw.json -o "$OUT_W"
+python3 - <<'PY'
+import json, sys
+from pathlib import Path
+n = json.loads(Path("artifacts/normalize-smoke/wso2-normalized.json").read_text())
+required = [
+    "http_status", "error", "token_type", "expires_in",
+    "refresh_issued", "claim_keys_id", "claim_keys_access", "access_token_is_jwt",
+]
+missing = [k for k in required if k not in n]
+if missing:
+    print("FAIL wso2 missing fields:", missing)
+    sys.exit(1)
+if n["http_status"] != 200 or not n["refresh_issued"]:
+    print("FAIL unexpected wso2 values", n)
+    sys.exit(1)
+if "sub" not in n["claim_keys_id"]:
+    print("FAIL wso2 id token keys missing sub", n["claim_keys_id"])
+    sys.exit(1)
+if n["access_token_is_jwt"] is not False:
+    print("FAIL expected opaque WSO2 access token in this pin", n)
+    sys.exit(1)
+print("PASS wso2 normalize →", "artifacts/normalize-smoke/wso2-normalized.json")
+
+m = json.loads(Path("results/case1-partial/matrix-C1-token-shape-2026-07-23.json").read_text())
+assert m["rows"][0]["verdict"] == "same"
+assert m["rows"][1]["verdict"] == "config_drift"
+assert m["config_equivalence"]["passed"] is False
+print("PASS case1 partial matrix present (", len(m["rows"]), "rows)")
+PY
+
+echo "PASS: dual-IdP Case 1 partial smoke green."

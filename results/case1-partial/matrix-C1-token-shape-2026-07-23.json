@@ -1,0 +1,53 @@
+{
+  "matrix_id": "C1-partial-token-shape-2026-07-23",
+  "profile_id": "P-PASSWORD-OPENID-v0",
+  "created_utc": "2026-07-23T16:30:00Z",
+  "git_tag": "case1-partial-2026-07",
+  "idp_versions": {
+    "keycloak": "quay.io/keycloak/keycloak:26.0.7",
+    "wso2is": "wso2/wso2is:7.0.0"
+  },
+  "config_equivalence": {
+    "passed": false,
+    "notes": "Grant type and requested scopes matched (password + openid profile email). Access/refresh lifetimes NOT equated (KC realm default 300s vs WSO2 default 3600s). JWT access-token issuance NOT equated (KC default JWT; WSO2 IS 7.0.0 default opaque). Claim-attribute mappings NOT equated (WSO2 ID token lacked email/profile claims despite scopes)."
+  },
+  "rows": [
+    {
+      "feature": "password_grant_openid_issues_tokens",
+      "expected": "HTTP 200, token_type Bearer, refresh_issued true, id_token JWT contains claim key sub",
+      "observed": {
+        "keycloak": {
+          "http_status": 200,
+          "token_type": "Bearer",
+          "refresh_issued": true,
+          "claim_keys_id_has_sub": true
+        },
+        "wso2is": {
+          "http_status": 200,
+          "token_type": "Bearer",
+          "refresh_issued": true,
+          "claim_keys_id_has_sub": true
+        }
+      },
+      "verdict": "same",
+      "notes": "Both IdPs completed password+openid on itl-lab. Full fixture paths: fixtures/keycloak-token-raw.json, fixtures/wso2-token-raw.json."
+    },
+    {
+      "feature": "access_token_is_jwt",
+      "expected": "Access-token JWT-ness matches only after JWT access-token config is equated; until then do not narrate as product superiority",
+      "observed": {
+        "keycloak": {
+          "access_token_is_jwt": true,
+          "claim_keys_access_count": 20
+        },
+        "wso2is": {
+          "access_token_is_jwt": false,
+          "claim_keys_access_count": 0
+        }
+      },
+      "verdict": "config_drift",
+      "impact": "Migrators that decode access tokens as JWTs will see rich claim_keys_access on Keycloak and an empty set on default WSO2 IS 7.0.0 (opaque token). Equate JWT access-token settings before any implementation_drift claim on access-token claims.",
+      "notes": "Honest first comparative cell for Case 1. Opaque vs JWT is a lab-config / product-default difference under unmatched equivalence checklist."
+    }
+  ]
+}
