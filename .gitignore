@@ -1,0 +1,14 @@
+.DS_Store
+.env
+*.pyc
+__pycache__/
+.venv/
+logs/*.json
+logs/*.log
+!logs/README.md
+results/*.json
+!results/README.md
+# keep normalize-smoke artifact committed as the executable shape demo
+artifacts/**
+!artifacts/normalize-smoke/
+!artifacts/normalize-smoke/**

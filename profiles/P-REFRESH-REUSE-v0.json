@@ -1,0 +1,21 @@
+{
+  "id": "P-REFRESH-REUSE-v0",
+  "version": "0.1",
+  "description": "Placeholder profile — refresh reuse after rotation. Not executable until drivers land.",
+  "flow": "authorization_code_pkce",
+  "spine": "refresh_token",
+  "client": {
+    "client_id": "itl-lab-client",
+    "pkce": true,
+    "offline_access": false
+  },
+  "perturbations": [
+    { "kind": "refresh_reuse", "params": {} }
+  ],
+  "assertions": [
+    {
+      "feature": "refresh_reuse_after_rotation",
+      "expected": "second use of rotated refresh is rejected"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "idp": "keycloak",
+  "capture_note": "Live capture on stackdiff-lab Keycloak 26.0.7 realm=itl via password grant 2026-07-23. Public alias stackdiff-lab only. Token signatures and refresh secret redacted for public tree; claim keys preserved from live capture.",
+  "http_status": 200,
+  "refresh_reuse_accepted": null,
+  "lab_environment": {
+    "public_alias": "stackdiff-lab",
+    "uname_r": "6.8.0-134-generic",
+    "keycloak_image": "quay.io/keycloak/keycloak:26.0.7",
+    "realm": "itl",
+    "client_id": "itl-lab-client",
+    "grant": "password"
+  },
+  "body": {
+    "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Inh5aV9nNTFCeWE5UmlHa2FnT2kxZ2NLZ0ZUSkF6d3ZzS1NWZUczckx4cGcifQ.eyJleHAiOjE3ODQ4MjMzNzEsImlhdCI6MTc4NDgyMzA3MSwianRpIjoiNzFhMjg2NTktNDU2OC00YWIyLWE0ZTctNWM2NjNlNjEwODYyIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMTo4MDgwL3JlYWxtcy9pdGwiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiMzUyMWNiYWUtNDQ3Yi00M2Y0LTg1YjYtODIyYjgxYThlYjk5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaXRsLWxhYi1jbGllbnQiLCJzaWQiOiI2OTQyODY2ZS1lMDc1LTQ1YWUtOGJlMC1lZTIxZTU1MjIxZTIiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3QiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJkZWZhdWx0LXJvbGVzLWl0bCJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkxhYiBVc2VyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibGFidXNlciIsImdpdmVuX25hbWUiOiJMYWIiLCJmYW1pbHlfbmFtZSI6IlVzZXIiLCJlbWFpbCI6ImxhYkBleGFtcGxlLmxvY2FsIn0.REDACTED_LIVE_SIG",
+    "expires_in": 300,
+    "refresh_expires_in": 1800,
+    "refresh_token": "redacted-live-refresh",
+    "token_type": "Bearer",
+    "id_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Inh5aV9nNTFCeWE5UmlHa2FnT2kxZ2NLZ0ZUSkF6d3ZzS1NWZUczckx4cGcifQ.eyJleHAiOjE3ODQ4MjMzNzEsImlhdCI6MTc4NDgyMzA3MSwianRpIjoiYmU3NjJlOGEtMDlhZC00MzUxLTkwNDQtYzk2YzE0NmFkNTJmIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMTo4MDgwL3JlYWxtcy9pdGwiLCJhdWQiOiJpdGwtbGFiLWNsaWVudCIsInN1YiI6IjM1MjFjYmFlLTQ0N2ItNDNmNC04NWI2LTgyMmI4MWE4ZWI5OSIsInR5cCI6IklEIiwiYXpwIjoiaXRsLWxhYi1jbGllbnQiLCJzaWQiOiI2OTQyODY2ZS1lMDc1LTQ1YWUtOGJlMC1lZTIxZTU1MjIxZTIiLCJhdF9oYXNoIjoiSEoxSXdSSTUxdWtOdlpfSDZMUWdJUSIsImFjciI6IjEiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkxhYiBVc2VyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibGFidXNlciIsImdpdmVuX25hbWUiOiJMYWIiLCJmYW1pbHlfbmFtZSI6IlVzZXIiLCJlbWFpbCI6ImxhYkBleGFtcGxlLmxvY2FsIn0.REDACTED_LIVE_SIG",
+    "scope": "openid profile email"
+  }
+}
