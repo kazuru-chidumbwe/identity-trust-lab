@@ -1,8 +1,8 @@
 # Identity Trust Lab
 
-Reusable **OIDC semantic measurement** framework: identical profiles across identity providers → **field extraction v0** → deviation matrix.
+Reusable OIDC semantic measurement framework: identical profiles across identity providers > field extraction v0 > deviation matrix.
 
-Not a product shootout. Not a conformance suite. Synthetic / lab IdPs only. **Normalization** (full semantic mapping) is a future layer.
+Not a product shootout. Not a conformance suite. Synthetic / lab IdPs only. Normalization (full semantic mapping) is a future layer.
 
 ## Status
 
@@ -13,7 +13,7 @@ Not a product shootout. Not a conformance suite. Synthetic / lab IdPs only. **No
 | Related work | [`docs/RELATED-WORK.md`](docs/RELATED-WORK.md) |
 | Dual-IdP Case 1 (partial) | [`results/case1-partial/matrix-C1-token-shape-2026-07-23.json`](results/case1-partial/matrix-C1-token-shape-2026-07-23.json) — Keycloak vs WSO2 IS |
 | Normalize smoke | Keycloak + WSO2 · `./scripts/quick_test.sh` green |
-| Lab pin | **itl-lab** · KC `26.0.7` · WSO2 IS `7.0.0` · `uname_r` 6.8.0-134-generic |
+| Lab pin | itl-lab · KC `26.0.7` · WSO2 IS `7.0.0` · `uname_r` 6.8.0-134-generic |
 
 ## Quick start
 
@@ -31,14 +31,14 @@ Under matched grant + scopes on itl-lab (`P-TOKEN-SHAPE-v0`):
 | Feature | Verdict |
 | --- | --- |
 | Password+openid issues tokens (200 / Bearer / refresh / `sub`) | `same` |
-| Access token is JWT | `config_drift` — KC default JWT vs WSO2 IS 7.0.0 default **opaque** |
-| `expires_in` token lifetime | `config_drift` — 300s vs 3600s (lifetimes **not** equated) |
-| ID-token `email` after `profile`+`email` scopes | `config_drift` — KC `has_email: true` vs WSO2 `has_email: false` (claim mapping **not** equated) |
+| Access token is JWT | `config_drift` — KC default JWT vs WSO2 IS 7.0.0 default opaque |
+| `expires_in` token lifetime | `config_drift` — 300s vs 3600s (lifetimes not equated) |
+| ID-token `email` after `profile`+`email` scopes | `config_drift` — KC `has_email: true` vs WSO2 `has_email: false` (claim mapping not equated) |
 
 Operational checklist: [`results/case1-partial/config-equivalence-CE-TOKEN-SHAPE-v0.json`](results/case1-partial/config-equivalence-CE-TOKEN-SHAPE-v0.json) (`passed: false`).  
 Protocol: [`docs/config-equivalence-protocol.md`](docs/config-equivalence-protocol.md).  
 
-**Not** a claim about IdPs in general — pinned lab snapshot only. Pipeline term: **field extraction v0** (normalization = future layer).
+**Not** a claim about IdPs in general — pinned lab snapshot only. Pipeline term: field extraction v0 (normalization = future layer).
 
 Optional live re-capture:
 
@@ -56,13 +56,13 @@ python3 scripts/redact_wso2_fixture.py
 
 Given identical OpenID Connect profiles, do independent IdPs expose identical protocol semantics?
 
-Pairwise matrices validate the **instrument** on pinned versions. They do not license claims about IdPs in general.
+Pairwise matrices validate the instrument on pinned versions. They do not license claims about IdPs in general.
 
 ## Framework
 
 1. **Profile** — deterministic OIDC scenario JSON  
 2. **Drivers** — same profile bytes → each IdP → raw capture  
-3. **Field extraction v0** — HTTP + tokens → comparable fields (**normalization** = future semantic-mapping layer; not implemented on this pin)  
+3. **Field extraction v0** — HTTP + tokens → comparable fields (normalization = future semantic-mapping layer; not implemented on this pin)  
 4. **Deviation matrix** — rows with `verdict` ∈ {`same`, `config_drift`, `implementation_drift`, `undefined`, `harness_error`}
 
 ## Docs
