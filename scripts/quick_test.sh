@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+!/usr/bin/env bash
 # Smoke gate: Keycloak + WSO2 normalize paths + Case 1 partial matrix present.
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -36,6 +36,10 @@ assert m["rows"][1]["feature"] == "access_token_is_jwt" and m["rows"][1]["verdic
 assert m["rows"][2]["feature"] == "token_lifetime_expires_in" and m["rows"][2]["verdict"] == "config_drift"
 assert m["rows"][2]["observed"]["keycloak"]["expires_in"] == 300
 assert m["rows"][2]["observed"]["wso2is"]["expires_in"] == 3600
+assert m["rows"][3]["feature"] == "id_token_claim_key_set_email_profile" and m["rows"][3]["verdict"] == "config_drift"
+assert m["rows"][3]["observed"]["keycloak"]["has_email"] is True
+assert m["rows"][3]["observed"]["wso2is"]["has_email"] is False
+assert len(m["rows"]) == 4
 assert m["config_equivalence"]["passed"] is False
 assert m["config_equivalence"].get("checklist_id") == "CE-TOKEN-SHAPE-v0"
 ce = json.loads(Path("results/case1-partial/config-equivalence-CE-TOKEN-SHAPE-v0.json").read_text())
@@ -43,6 +47,7 @@ assert ce["passed"] is False
 assert ce["checklist_id"] == "CE-TOKEN-SHAPE-v0"
 assert any(i["id"] == "access_token_lifetime_expires_in" and i["equated"] is False for i in ce["items"])
 assert any(i["id"] == "access_token_jwt" and i["equated"] is False for i in ce["items"])
+assert any(i["id"] == "id_token_claim_key_set_email_profile" and i["equated"] is False for i in ce["items"])
 print("PASS case1 partial matrix present (", len(m["rows"]), "rows)")
 print("PASS config-equivalence CE-TOKEN-SHAPE-v0 present (passed=false)")
 PY

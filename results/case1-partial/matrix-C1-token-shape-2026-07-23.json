@@ -65,6 +65,21 @@
       "verdict": "config_drift",
       "impact": "Clients hardcoding refresh timing or assuming a shared access-token lifetime will behave differently across these IdP defaults (300s vs 3600s). Equate token lifetimes before any implementation_drift claim on expiry semantics.",
       "notes": "Numeric expires_in from field extraction v0; this row assigns the framework verdict so readers are not left to invent one. Lifetimes were explicitly NOT equated on CE-TOKEN-SHAPE-v0."
+    },
+    {
+      "feature": "id_token_claim_key_set_email_profile",
+      "expected": "After requesting profile+email scopes, id_token claim-key set includes email only after claim-attribute mapping is equated; until then do not narrate as product superiority",
+      "observed": {
+        "keycloak": {
+          "has_email": true
+        },
+        "wso2is": {
+          "has_email": false
+        }
+      },
+      "verdict": "config_drift",
+      "impact": "Clients that assume an ID token will carry email after requesting the email scope will work against Keycloak defaults and fail silently against WSO2 IS defaults on this pin. Equate claim-attribute mapping before any implementation_drift claim on ID-token claim sets.",
+      "notes": "Promoted from CE-TOKEN-SHAPE-v0 item id_token_claim_key_set_email_profile (equated: false; required_for_implementation_drift: true). Minimal proxy: membership of email in claim_keys_id from field extraction v0."
     }
   ]
 }

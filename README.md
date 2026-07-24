@@ -33,6 +33,7 @@ Under matched grant + scopes on itl-lab (`P-TOKEN-SHAPE-v0`):
 | Password+openid issues tokens (200 / Bearer / refresh / `sub`) | `same` |
 | Access token is JWT | `config_drift` — KC default JWT vs WSO2 IS 7.0.0 default **opaque** |
 | `expires_in` token lifetime | `config_drift` — 300s vs 3600s (lifetimes **not** equated) |
+| ID-token `email` after `profile`+`email` scopes | `config_drift` — KC `has_email: true` vs WSO2 `has_email: false` (claim mapping **not** equated) |
 
 Operational checklist: [`results/case1-partial/config-equivalence-CE-TOKEN-SHAPE-v0.json`](results/case1-partial/config-equivalence-CE-TOKEN-SHAPE-v0.json) (`passed: false`).  
 Protocol: [`docs/config-equivalence-protocol.md`](docs/config-equivalence-protocol.md).  

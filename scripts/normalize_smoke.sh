@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+!/usr/bin/env bash
 # Normalize smoke — raw token material → methodology fields.
 set -euo pipefail
 cd "$(dirname "$0")/.."
