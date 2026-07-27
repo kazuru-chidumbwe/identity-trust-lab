@@ -20,9 +20,12 @@ Not a product shootout. Not a conformance suite. Synthetic / lab IdPs only. Norm
 ```bash
 git clone https://github.com/kazuru-chidumbwe/identity-trust-lab
 cd identity-trust-lab
+git checkout v0.1.0   # or case1-partial-2026-07 — see docs/TAGS.md
 ./scripts/quick_test.sh
 # → PASS; Keycloak + WSO2 normalize + Case 1 partial matrix checks
 ```
+
+Release history: [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Partial lab evidence (instrument validation)
 
