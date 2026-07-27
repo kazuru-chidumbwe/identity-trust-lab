@@ -13,9 +13,9 @@ Expect exit 0, Keycloak + WSO2 normalized artifacts under `artifacts/normalize-s
 | Path | Meaning |
 | --- | --- |
 | [`results/case1-partial/matrix-C1-token-shape-2026-07-23.json`](../results/case1-partial/matrix-C1-token-shape-2026-07-23.json) | First dual-IdP rows on itl-lab |
-| Tag `case1-partial-2026-07` | Measurement tag for the above (when published) |
+| Tag `v0.1.0` / `case1-partial-2026-07` | SemVer + measurement tag for the above (same tree) |
 
-When a matrix or capture is published as evidence, cite the **Git tag** (not necessarily `main`) and verify any SHA published with that citation.
+When a matrix or capture is published as evidence, cite **`v0.1.0`** (or the dated measurement tag; not floating `main`) and verify any SHA published with that citation. See [`TAGS.md`](TAGS.md) and [`../CHANGELOG.md`](../CHANGELOG.md).
 
 ## Lab environment
 
